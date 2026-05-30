@@ -1,0 +1,11 @@
+[package]
+name = "grand-pattern-bench-v2"
+version = "0.1.0"
+edition = "2021"
+description = "Fixing the conservation law — three proposed fixes tested against the broken baseline"
+
+[[bin]]
+name = "bench"
+path = "src/main.rs"
+
+[dev-dependencies]
