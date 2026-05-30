@@ -111,7 +111,15 @@ impl Database {
     pub fn new() -> Self {
         Self { entries: Vec::new() }
     }
+}
 
+impl Default for Database {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl Database {
     pub fn insert(&mut self, v: VecN) {
         self.entries.push(v);
     }
@@ -331,7 +339,15 @@ impl RatioStrategy {
     pub fn new() -> Self {
         Self { history: Vec::new() }
     }
+}
 
+impl Default for RatioStrategy {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+impl RatioStrategy {
     pub fn ratio_stability(&self) -> f64 {
         if self.history.len() < 2 {
             return 0.0;
@@ -440,7 +456,7 @@ pub fn run_simulation_opts(
                 let surprise = diff.magnitude();
 
                 // Check for anomaly spike
-                if anomaly_at.map_or(false, |at| tick >= at && tick < at + 100) {
+                if anomaly_at.is_some_and(|at| tick >= at && tick < at + 100) {
                     if surprise > max_surprise {
                         max_surprise = surprise;
                     }
